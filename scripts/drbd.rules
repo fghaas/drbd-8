@@ -1,5 +1,7 @@
 # This file contains the rules to create named DRBD devices.
 
+SUBSYSTEM!="block", GOTO="drbd_end"
+
 # DO NOT WRAP THIS LINE
 #
 # old udev does not understand some of it,
@@ -13,3 +15,5 @@
 #
 # DO NOT WRAP THIS LINE
 KERNEL=="drbd*", IMPORT{program}="/sbin/drbdadm sh-udev minor-%m", NAME="$env{DEVICE}", SYMLINK="drbd/by-res/$env{RESOURCE} drbd/by-disk/$env{DISK}"
+
+LABEL="drbd_end"
